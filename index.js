@@ -81,7 +81,7 @@ function addToYourTasks(task) {
 //Fetch data
 function fetchData() {
     //The json file we want to access
-    const endpoint = "http://gitlab.wd-agency.com/snippets/2/raw";
+    const endpoint = "data.json";
 
     //Fetching data
     fetch(endpoint)
