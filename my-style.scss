@@ -1,0 +1,171 @@
+$text-color: #ebf1f3;
+$background-color: linear-gradient(to bottom, rgb(75, 125, 150) 0%, rgba(81,172,139,1) 100%);
+$myPaddingSetUp: .75rem 1.25rem;
+
+.task-unavailable{
+    color: red !important;
+}
+
+body{
+    background-image:url('imgs/dark.jpeg');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.task-status{
+    color: rgb(15, 161, 15);
+    font-style: italic;
+    float: right;
+}
+
+.task{
+    cursor: pointer;
+    margin-bottom: 8px;
+
+}
+
+.time-container{
+    display: flex;
+    justify-content: space-between;
+    padding: $myPaddingSetUp;
+    padding-bottom: 0;
+    font-weight: bold;
+    color: #ebf1f3;
+    background: $background-color;
+}
+
+#title-task{
+    padding: $myPaddingSetUp;
+    font-size: 1.36rem;
+    font-weight: bold;
+    color: #ebf1f3;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.change-title-button{
+    background: $background-color;
+    color: $text-color;
+    font-size: 1rem;
+    padding: .15rem 1.75rem;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    font-weight: bold;
+        &:hover {
+        color:white;
+        border: 1px solid white;
+        transition: .5s;
+    }
+   
+}
+
+.my-drop{
+    background: $background-color;
+    color: $text-color;
+    font-size: .85rem;
+    padding: .2rem .55rem;
+    &:hover {
+        color:white;
+        opacity: .75;
+    }
+}
+
+.is-active{
+    font-weight: bold;
+    color: #57a0a5;
+}
+
+.is-active::before{
+    content:"• ";
+}
+
+.dropdown-item{
+    color: #57a0a5;
+    text-align: right;
+    &:hover {
+        font-weight: bold;
+        color: #57a0a5;
+    }
+}
+
+
+.dropdown-menu.show {
+    width: 163px;
+}
+
+#another-day{
+    padding: $myPaddingSetUp;
+    display: flex;
+    justify-content: center;
+}
+
+.day{
+    margin: 10px;
+    background: #51ac8b;
+    color: white;
+    font-size: 0.8rem;
+    &:hover {
+        color:white;
+        font-weight: bold;
+        opacity: .85;
+    }
+}
+
+#previous-day, #next-day{
+    display: none;
+}
+
+#tasks-container{
+    opacity: .9;
+}
+
+.your-tasks-title{
+    font-size: 1.36rem;
+    font-weight: bold;
+    color: #ebf1f3;
+}
+
+@media only screen and (min-width: 600px) {
+    main{
+        padding: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #title-task{
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    main{
+        padding: 20px;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    #title-task{
+        padding-top: 40px;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+
+@media only screen and (min-width: 1000px) {
+    main{
+        padding: 20px;
+        padding-left: 120px;
+        padding-right: 120px;
+    }
+    #title-task{
+        padding-top: 80px;
+        padding-left: 120px;
+        padding-right: 120px;
+    }
+}
