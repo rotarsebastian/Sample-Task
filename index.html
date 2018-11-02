@@ -13,16 +13,22 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+
+    <!-- Document title -->
     <title>My day</title>
+
+    <!-- Adding favicon -->
+    <link rel="shortcut icon" type="image/png" href="imgs/favicon.png" />
 </head>
 
 <body>
-
+    <!-- Top bar with date and clock -->
     <div class="time-container">
         <p class="real-day"></p>
         <p class="real-time"></p>
     </div>
 
+    <!-- Title and change background button with its dropdown-->
     <div id="title-task">
         <div class="title-name">Today's tasks</div>
         <div class="dropdown">
@@ -37,34 +43,43 @@
             </div>
         </div>
     </div>
+
+
     <main>
+        <!-- Tasks container for today -->
         <div id="tasks-container">
 
         </div>
 
+        <!-- Tasks container for yesterday -->
         <div id="previous-day">
 
         </div>
 
+        <!-- Tasks container for tomorrow -->
         <div id="next-day">
 
         </div>
 
+        <!-- Buttons for yesterday and tomorrow -->
         <div id="another-day">
             <button type="button" class="btn day previous-day" onclick="goToPreviousDay(this)">Yesterday</button>
             <button type="button" class="btn day next-day" onclick="goToNextDay(this)">Tomorrow</button>
         </div>
 
-        <h5 class="your-tasks-title">Your tasks today</h5>
+        <!-- Title for active tasks -->
+        <h5 class="your-tasks-title">Doing or done today</h5>
 
+        <!-- Container for active tasks -->
         <div id="your-tasks-container">
 
         </div>
 
-
+        <!-- Login button which changes the page title-->
         <button type="button" class="btn change-title-button" onclick="changePageTitle(this)">Login</button>
 
     </main>
+    <!-- Template for any task -->
     <template id="tasks-template">
         <div class="task list-group" id="task" onclick="addToYourTasks(this)">
             <div class="list-group-item list-group-item-action flex-column align-items-start">
@@ -72,8 +87,8 @@
                     <h5 class="mb-1 task-description"></h5>
                     <small class="task-time">3 days ago</small>
                 </div>
-                <p class="mb-1">Task becomes unavailable 2 hours after the task time. If the task is available you can
-                    click on it and add to your tasks</p>
+                <p class="mb-1 task-text">Task becomes unavailable 2 hours after the task time. If the task is
+                    available you can click on it and add it to your active tasks</p>
                 <small class="task-status">available</small>
             </div>
         </div>
@@ -87,6 +102,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <!-- My script JavaScript -->
     <script src="index.js"></script>
 </body>
 

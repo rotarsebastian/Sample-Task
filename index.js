@@ -1,7 +1,7 @@
+//Global varaiables
 let dayOfTheWeek;
 let previousDay;
 let nextDay;
-let timestamp;
 let hour;
 
 //Animate the list
@@ -18,26 +18,45 @@ fetchData();
 //Functions to change the page name with the name of the task
 function changePageTitle(button) {
 
-    //Remove outline of the button after click
+    //Remove outline of the button after click and change button's name
     button.blur();
 
+    //Select the title
     let titleName = document.querySelector(".title-name");
 
-    titleName.style.marginLeft = "40px";
-    titleName.style.transition = "1.5s";
+    //Check button's name
+    if (button.textContent == "Login") {
+        button.textContent = "Log Out";
 
-    //Asign the name of the task to the page title
-    document.title = "YourDay";
-    let pageTitle = document.querySelector(".title-name");
-    pageTitle.textContent = "Good morning! Here are the tasks for today";
+        //Animate the title
+        titleName.style.marginLeft = "35px";
+        titleName.style.transition = "1.5s";
+
+        //Asign the name to the page title
+        document.title = "YourDay";
+        titleName.innerHTML = "Good morning! <br> Here are the tasks for today";
+    }
+    else {
+        //Change the button name to login again
+        button.textContent = "Login";
+
+        //Animate the title
+        titleName.style.marginLeft = "0";
+        titleName.style.transition = "1.5s";
+
+        //Asign the name to the page title
+        document.title = "My day";
+        titleName.innerHTML = "Today's tasks";
+    }
+
 }
 
 //Change backgrouns style
 function changeBackgroundColor(style) {
-    //Get the body, the title and the tasks section from the document
+    //Get the body and the titles rom the document
     let myBody = document.querySelector("body");
-    let myTaskContainer = document.querySelector("#tasks-container");
     let myTitle = document.querySelector("#title-task");
+    let myTaskTitle = document.querySelector(".your-tasks-title");
 
     //Remove the active class
     let firstActive = document.querySelectorAll(".dropdown-item");
@@ -50,30 +69,47 @@ function changeBackgroundColor(style) {
     //Add the active class for the selected style
     style.classList.add("is-active");
 
-    //Add the background image for each style
+    //Add the background image and some style for each theme
     if (style.textContent == "Light") {
         myTitle.style.color = "#57a0a5";
+        myTaskTitle.style.color = "#57a0a5";
         myBody.style.backgroundImage = `url('imgs/background.jpeg')`;
     }
     else if (style.textContent == "Medium") {
         myTitle.style.color = "#495057";
+        myTaskTitle.style.color = "#495057";
         myBody.style.backgroundImage = `url('imgs/medium.jpeg')`;
     }
     else if (style.textContent == "Dark") {
         myTitle.style.color = "#ebf1f3";
+        myTaskTitle.style.color = "#ebf1f3";
         myBody.style.backgroundImage = `url('imgs/dark.jpeg')`;
     }
 }
 
+//Move a task from lisk of tasks to your tasks
 function addToYourTasks(task) {
+    //Select the task by status
     let status = task.querySelector(".task-status");
+
+    //Creating a copy of the task
     let copy = task;
+
+    //If task is available delete it and move the copy into your task container
     if (status.textContent == "available") {
+        //Remove the task from today's tasks
         task.remove();
+
+        //Select the doing/done container
         let yourTasksContainer = document.querySelector("#your-tasks-container");
+
+        //Change status to in progress
+        let copyStatus = task.querySelector(".task-status");
+        copyStatus.textContent = "in progress";
+        copyStatus.style.color = "#4b7d96";
+
+        //Append it to doing/done tasks
         yourTasksContainer.appendChild(copy);
-        var tl = new TimelineLite();
-        tl.staggerFrom(copy, .7, { y: 500 });
     }
 
 }
@@ -89,7 +125,7 @@ function fetchData() {
         .then(tasks => showTasks(tasks));
 }
 
-
+//Loop through every single object
 function showTasks(tasks) {
     tasks.forEach(showSingleTask);
 }
@@ -173,7 +209,7 @@ function showSingleTask(task) {
             }
         }
 
-
+        //Make the tasks from yesterday unavailable
         clone.querySelector(".task-status").textContent = "unavailable";
         clone.querySelector(".task-status").classList.add("task-unavailable");
 
@@ -213,6 +249,7 @@ function showSingleTask(task) {
             }
         }
 
+        //Make the tasks for tomorrow unavailable
         clone.querySelector(".task-status").textContent = "unavailable";
         clone.querySelector(".task-status").classList.add("task-unavailable");
 
@@ -221,51 +258,100 @@ function showSingleTask(task) {
     }
 }
 
+//Change the tasks from today to yesterday and back
 function goToPreviousDay(setButton) {
+
     if (setButton.textContent == "Yesterday") {
+
+        //Hide the today's tasks
         let todaySection = document.querySelector("#tasks-container");
         todaySection.style.display = "none";
 
+        //Show yesterday tasks
         let yesterdaySection = document.querySelector("#previous-day");
         yesterdaySection.style.display = "block";
+
+        //Make the button able to go back
         setButton.textContent = "Get back to today's tasks";
 
+        //Hide the next day button
         let next = document.querySelector(".next-day");
         next.style.display = "none";
+
+        //Change title name to yesterday
+        let myTitle = document.querySelector(".title-name");
+        myTitle.textContent = `Yesterday tasks`;
     }
     else {
+        //Same operation, just in reverse when the button is called
+        //get back to today's tasks
+
+        //Show today's tasks again
         let todaySection = document.querySelector("#tasks-container");
         todaySection.style.display = "block";
 
+        //Hide yesterday tasks
         let yesterdaySection = document.querySelector("#previous-day");
         yesterdaySection.style.display = "none";
+
+        //Make the button name Yesterday again
         setButton.textContent = "Yesterday";
+
+        //Show the next day button
         let next = document.querySelector(".next-day");
         next.style.display = "block";
+
+        //Change title name to today
+        let myTitle = document.querySelector(".title-name");
+        myTitle.textContent = `Today's tasks`;
     }
 }
 
+//Change the tasks from today to tomorrow and back
 function goToNextDay(setButton) {
+
     if (setButton.textContent == "Tomorrow") {
+
+        //Hide the today's tasks
         let todaySection = document.querySelector("#tasks-container");
         todaySection.style.display = "none";
 
+        //Show the tomorrow's tasks
         let tomorrowSection = document.querySelector("#next-day");
         tomorrowSection.style.display = "block";
+
+        //Make the user able to come back to today's tasks
         setButton.textContent = "Get back to today's tasks";
 
+        //Hide the button for previous days
         let previous = document.querySelector(".previous-day");
         previous.style.display = "none";
+
+        //Change title name to tomorrow
+        let myTitle = document.querySelector(".title-name");
+        myTitle.textContent = `Tomorrow's tasks`;
     }
     else {
+        //When the button is called Get back to today's tasks
+
+        //Show today's tasks again
         let todaySection = document.querySelector("#tasks-container");
         todaySection.style.display = "block";
 
+        //Hide tomorrow's tasks
         let tomorrowSection = document.querySelector("#next-day");
         tomorrowSection.style.display = "none";
+
+        //Set the name of the button to Tommorrow
         setButton.textContent = "Tomorrow";
+
+        //Show the yesterday button 
         let previous = document.querySelector(".previous-day");
         previous.style.display = "block";
+
+        //Change title back name to today's tasks
+        let myTitle = document.querySelector(".title-name");
+        myTitle.textContent = `Today's tasks`;
     }
 }
 
@@ -285,9 +371,6 @@ function getTime() {
     //Generate the actual date and make it a string in order to be procesed later on
     let date = new Date;
     let today = date.toString();
-
-    //Creating a global timestamp
-    timestamp = date.getTime();
 
     //Getting hours and minutes
     let hourNow = date.getHours();
@@ -337,11 +420,19 @@ function getTime() {
     for (let i = 0; i < weekArray.length; i++) {
         let sliceDay = weekArray[i].slice(0, 3);
         if (sliceDay == weekDay) {
+
+            //Set the day we need
             theNewDay = weekArray[i];
+
+            //Setting our global variable with today's day of the week
             dayOfTheWeek = weekArray[i];
+
+            //Pass the value of previous day to the global variable to be used later on
             if (weekArray[i - 1]) {
                 previousDay = weekArray[i - 1];
             }
+
+            //Pass the value of next day to the global variable to be used later on
             if (weekArray[i + 1]) {
                 nextDay = weekArray[i + 1];
             }
@@ -376,3 +467,16 @@ function getTime() {
 }
 //Looping the function every 0.9 second
 setInterval(getTime, 900);
+
+//Count your tasks
+function countTasks() {
+    //Count the tasks for the day we need
+    let availableTasks = document.querySelector("#your-tasks-container");
+    let tasksAmount = availableTasks.childElementCount;
+
+    //Write them on the title of doing/done tasks
+    let documentTitle = document.querySelector(".your-tasks-title");
+    documentTitle.textContent = `Doing or done today (${tasksAmount})`;
+
+}
+setInterval(countTasks, 100);

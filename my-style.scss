@@ -2,9 +2,10 @@ $text-color: #ebf1f3;
 $background-color: linear-gradient(to bottom, rgb(75, 125, 150) 0%, rgba(81,172,139,1) 100%);
 $myPaddingSetUp: .75rem 1.25rem;
 
-.task-unavailable{
-    color: red !important;
-}
+/* 
+Mobile version under 600px screens styles
+*/
+
 
 body{
     background-image:url('imgs/dark.jpeg');
@@ -12,6 +13,11 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.task-unavailable{
+    color: red !important;
+}
+
 
 .task-status{
     color: rgb(15, 161, 15);
@@ -33,17 +39,17 @@ body{
     font-weight: bold;
     color: #ebf1f3;
     background: $background-color;
+    font-size: .9rem;
 }
 
 #title-task{
     padding: $myPaddingSetUp;
-    font-size: 1.36rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #ebf1f3;
     display: flex;
     justify-content: space-between;
 }
-
 
 .change-title-button{
     background: $background-color;
@@ -53,6 +59,7 @@ body{
     position: fixed;
     bottom: 10px;
     left: 50%;
+    display: none;
     transform: translate(-50%, -50%);
     z-index: 100;
     font-weight: bold;
@@ -67,7 +74,7 @@ body{
 .my-drop{
     background: $background-color;
     color: $text-color;
-    font-size: .85rem;
+    font-size: .80rem;
     padding: .2rem .55rem;
     &:hover {
         color:white;
@@ -93,10 +100,6 @@ body{
     }
 }
 
-
-.dropdown-menu.show {
-    width: 163px;
-}
 
 #another-day{
     padding: $myPaddingSetUp;
@@ -128,7 +131,13 @@ body{
     font-size: 1.36rem;
     font-weight: bold;
     color: #ebf1f3;
+    padding: $myPaddingSetUp;
+
 }
+
+/* 
+Tablet-desktop version, above 600px screens styles
+*/
 
 @media only screen and (min-width: 600px) {
     main{
@@ -136,10 +145,20 @@ body{
         padding-left: 20px;
         padding-right: 20px;
     }
+    .your-tasks-title{
+        padding-left: 0;
+    }
     #title-task{
+        font-size: 1.26rem;
         padding-top: 20px;
         padding-left: 20px;
         padding-right: 20px;
+    }
+    .change-title-button{
+        display: block;
+    }
+    .task-text{
+        width: 92%;
     }
 }
 
