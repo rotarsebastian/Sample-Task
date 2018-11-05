@@ -431,10 +431,16 @@ function getTime() {
             if (weekArray[i - 1]) {
                 previousDay = weekArray[i - 1];
             }
+            else {
+                previousDay = weekArray[weekArray.length - 1];
+            }
 
             //Pass the value of next day to the global variable to be used later on
             if (weekArray[i + 1]) {
                 nextDay = weekArray[i + 1];
+            }
+            else {
+                previousDay = weekArray[0];
             }
         }
     }
