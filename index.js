@@ -446,13 +446,13 @@ function getTime() {
     }
 
     //Adding the day and the number ending letters for the day  
-    if (today.slice(8, 10) == "01") {
+    if (today.slice(8, 10) == "01" || today.slice(8, 10) == "21" || today.slice(8, 10) == "31") {
         theNewDay = theNewDay + " " + "1st";
     }
-    else if (today.slice(8, 10) == "02") {
+    else if (today.slice(8, 10) == "02" || today.slice(8, 10) == "22") {
         theNewDay = theNewDay + " " + "2nd";
     }
-    else if (today.slice(8, 10) == "03") {
+    else if (today.slice(8, 10) == "03" || today.slice(8, 10) == "23") {
         theNewDay = theNewDay + " " + "3rd";
     }
     //Modifying dates like 04, 05 to be 4th and 5th
